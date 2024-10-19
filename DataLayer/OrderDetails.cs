@@ -8,12 +8,15 @@ namespace DataLayer;
 
 public class OrderDetails
 {
-    public string UnitPrice { get; set; } = string.Empty;
-    public int Quantity { get; set; }
-    public int Discount { get; set; }
-    public int OrderId { get; set; }
-    public int ProductId { get; set; }
-    public Order Order { get; set; } 
-    public Product Product { get; set; }
+    public double UnitPrice { get; set; } = 0.0;
+    public double Quantity { get; set; } = 0.0;
+    public double Discount { get; set; } = 0.0;
+    public int OrderId { get; set; } = 0;
+    public int ProductId { get; set; } = 0;
+    public Order? Order { get; set; }
+    public Product? Product { get; set; }
+
+
+  
 
 }

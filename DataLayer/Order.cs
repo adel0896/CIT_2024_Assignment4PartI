@@ -1,12 +1,16 @@
 ﻿namespace DataLayer;
 public class Order
 {
-    public int Id { get; set; }
-    public DateOnly Date { get; set; }
-    public DateOnly Require { get; set; } 
-    public DateOnly Shipped { get; set; }
-    public int Freight { get; set; }
-    public string ShipName { get; set; } = string.Empty;
-    public string ShipCity { get; set; } = string.Empty;
+    public int Id { get; set; } = 0;
+    public DateTime Date { get; set; } = DateTime.MinValue;
+    public DateTime? Required { get; set; } = DateTime.MinValue;
+    public DateTime? Shipped { get; set; } = DateTime.MinValue;
+    public int? Freight { get; set; } = 0;
+    public string? ShipName { get; set; }
+    public string? ShipCity { get; set; }
     public ICollection<OrderDetails> OrderDetails { get; set; }
+
+
 }
+
+

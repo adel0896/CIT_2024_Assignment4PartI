@@ -14,6 +14,21 @@ public class Product
     public int UnitsInStock { get; set; }
     public int CategoryId { get; set; }
     public Category Category { get; set; }
+    public ICollection<OrderDetails> OrderDetails { get; set; }
 
-    
+
+}
+
+public class ProductWithNameAndCategoryOnly
+
+{
+
+    public string ProductName { get; set; } = string.Empty;
+
+    public string CategoryName { get; set; } = string.Empty;
+}
+
+public class ProductWithCategoryName : Product
+{
+    public string CategoryName { get; set; } = string.Empty;
 }

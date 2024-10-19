@@ -20,9 +20,9 @@ internal class NortwindContext : DbContext
         optionsBuilder.LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information);
 
         string Host = "localhost";
-        string Db = "nortwind";
+        string Db = "northwind";
         string Uid = "postgres";
-        string Pwd = "13041968AdeStefi@";
+        string Pwd = "superdb123";
         string ConnectionString = $"host={Host};db={Db};uid={Uid};pwd={Pwd}";
         optionsBuilder.UseNpgsql(ConnectionString);
     }
@@ -63,22 +63,16 @@ internal class NortwindContext : DbContext
         //this converstion here is neccessary because this is type date in the database, DateOnly in the entity and the framework does not support this
         modelBuilder.Entity<Order>()
             .Property(x => x.Date)
-            .HasColumnName("orderdate")
-            .HasConversion(v => v.ToDateTime(new TimeOnly(0, 0)),  // Convert DateOnly to DateTime for database storage
-                           v => DateOnly.FromDateTime(v)           // Convert DateTime back to DateOnly when reading from the database
-        );
+            .HasColumnName("orderdate");
+
         modelBuilder.Entity<Order>()
-           .Property(x => x.Require)
-           .HasColumnName("requireddate")
-           .HasConversion(v => v.ToDateTime(new TimeOnly(0, 0)),  // Convert DateOnly to DateTime for database storage
-                          v => DateOnly.FromDateTime(v)           // Convert DateTime back to DateOnly when reading from the database
-       );
+           .Property(x => x.Required)
+           .HasColumnName("requireddate");
+
         modelBuilder.Entity<Order>()
           .Property(x => x.Shipped)
-          .HasColumnName("shippeddate")
-          .HasConversion(v => v.ToDateTime(new TimeOnly(0, 0)),  // Convert DateOnly to DateTime for database storage
-                         v => DateOnly.FromDateTime(v)           // Convert DateTime back to DateOnly when reading from the database
-      );
+          .HasColumnName("shippeddate");
+   
         modelBuilder.Entity<Order>().Property(x => x.Freight).HasColumnName("freight");
         modelBuilder.Entity<Order>().Property(x => x.ShipName).HasColumnName("shipname");
         modelBuilder.Entity<Order>().Property(x => x.ShipCity).HasColumnName("shipcity");

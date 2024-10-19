@@ -2,19 +2,9 @@
 using DataLayer;
 var dataservice = new DataService();
 
-//var categories = dataservice.GetCategories();
-
-
 //PrintCategories(dataservice);
-
-//dataservice.AddCategory("dsfsfksdlfk", "sfæsjdoi");
-//dataservice.DeleteCategory(9999);
-
-//PrintCategories(dataservice);
-
-PrintCategories(dataservice);
-PrintProducts(dataservice);
-GetOrderById(dataservice);
+//PrintProducts(dataservice);
+GetOrderDetailsByProductId(dataservice);
 
 static void PrintProducts(IDataService dataService)
 {
@@ -32,11 +22,42 @@ static void PrintCategories(IDataService dataService)
     }
 }
 
-static void GetOrderById(IDataService dataService)
+static void GetOrderDetailsByOrderId(IDataService dataService)
 {
-    var e = dataService.GetOrderById(10500);
+    var e = dataService.GetOrderDetailsByOrderId(10248);
     if (e != null)
     {
-        Console.WriteLine($"{e.Id}, {e.OrderDetails}, {e.ShipName}, {e.Require},{e.Date}");
+        foreach (var orderDetail in e)
+        {
+            Console.WriteLine($"OrderID: {orderDetail.OrderId}, Product: {orderDetail.Product.Name}, Quantity: {orderDetail.Quantity}");
+        }
     }
+}
+
+static void GetOrderById(IDataService dataService)
+{
+    var e = dataService.GetOrder(10248);
+    if (e != null)
+    {
+        Console.WriteLine($"OrderID: {e.Id}, Date: {e.Date}, Require: {e.Required}, ShipName: {e.ShipName}, ShipDate: {e.Shipped}");
+        foreach (var orderDetail in e.OrderDetails)
+        {
+            Console.WriteLine($"OrderID: {orderDetail.OrderId}, Product: {orderDetail.Product.Name}, Quantity: {orderDetail.Quantity}");
+        }
+    }
+}
+
+
+static void GetOrderDetailsByProductId(IDataService dataService)
+{
+    var e = dataService.GetOrderDetailsByProductId(11);
+
+    if(e != null)
+    {
+        foreach(var orderDetail in e)
+        {
+            Console.WriteLine($"OrderID: {orderDetail.OrderId}, Product: {orderDetail.Product.Name}, Quantity: {orderDetail.Quantity}");
+        }
+    }
+
 }
