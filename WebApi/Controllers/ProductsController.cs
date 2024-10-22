@@ -2,6 +2,7 @@ using DataLayer;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Models;
+using WebApi.Models.Product;
 
 namespace WebApi.Controllers;
 
@@ -63,6 +64,21 @@ namespace WebApi.Controllers;
 
         return Ok(model);
     }
+    
+    [HttpGet]
+    public IActionResult GetProductsByName([FromQuery] string name)
+    {
+        var products = _dataService.GetProductByName(name);
+
+        if (products == null || !products.Any())
+        {
+            return NotFound(); 
+        }
+
+        var model = CreateProductNameAndCategoryModel(products);
+        return Ok(model);
+    }
+
 
     private ProductModel? CraeteProductModel(ProductWithCategoryName? product)
     {
@@ -72,6 +88,20 @@ namespace WebApi.Controllers;
         }
 
         return product.Adapt<ProductModel>();
+    }
+
+    private List<ProductNameAndCategoryModel> CreateProductNameAndCategoryModel(List<ProductWithNameAndCategoryOnly> products)
+    {
+        if (products == null)
+        {
+            return null;
+        }
+
+        return products.Select(product => new ProductNameAndCategoryModel
+        {
+            Name = product.ProductName,
+            Category = product.CategoryName
+        }).ToList();
     }
 
 }

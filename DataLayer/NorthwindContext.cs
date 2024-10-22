@@ -20,9 +20,9 @@ internal class NortwindContext : DbContext
         optionsBuilder.LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information);
 
         string Host = "localhost";
-        string Db = "northwind";
+        string Db = "nortwind";
         string Uid = "postgres";
-        string Pwd = "superdb123";
+        string Pwd = "13041968AdeStefi@";
         string ConnectionString = $"host={Host};db={Db};uid={Uid};pwd={Pwd}";
         optionsBuilder.UseNpgsql(ConnectionString);
     }

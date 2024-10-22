@@ -35,3 +35,8 @@ Accept: application/json
 GET {{WebApi_HostAddress}}/api/products/category/2
 Accept: application/json
 ###
+
+GET {{WebApi_HostAddress}}/api/products?name=To
+Accept: application/json
+
+
