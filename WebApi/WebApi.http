@@ -32,3 +32,6 @@ Content-Type: application/json
 GET {{WebApi_HostAddress}}/api/products/1
 Accept: application/json
 ###
+GET {{WebApi_HostAddress}}/api/products/category/2
+Accept: application/json
+###
