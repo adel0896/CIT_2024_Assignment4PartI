@@ -31,21 +31,9 @@ namespace WebApi.Controllers;
                 return NotFound();
             }
 
-            var model = CreateProductModel(products);
+            var model = CreateProductListModel(products);
 
             return Ok(model);
-        }
-
-        private List<ProductModel> CreateProductModel(List<ProductWithCategoryName> products)
-        {
-            if (products == null)
-            {
-                return null;
-            }
-
-            var model = products.Adapt<List<ProductModel>>();
-
-            return model;
         }
     
 
@@ -60,7 +48,7 @@ namespace WebApi.Controllers;
             return NotFound();
         }
 
-        var model = CraeteProductModel(product);
+        var model = CreateProductModel(product);
 
         return Ok(model);
     }
@@ -80,7 +68,19 @@ namespace WebApi.Controllers;
     }
 
 
-    private ProductModel? CraeteProductModel(ProductWithCategoryName? product)
+    private List<ProductModel> CreateProductListModel(List<ProductWithCategoryName> products)
+    {
+        if (products == null)
+        {
+            return null;
+        }
+
+        var model = products.Adapt<List<ProductModel>>();
+
+        return model;
+    }
+
+    private ProductModel? CreateProductModel(ProductWithCategoryName? product)
     {
         if(product == null)
         {
