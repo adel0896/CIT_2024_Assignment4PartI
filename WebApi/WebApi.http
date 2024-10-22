@@ -28,3 +28,7 @@ Content-Type: application/json
     "description": "Test3"
 }
 ###
+
+GET {{WebApi_HostAddress}}/api/products/1
+Accept: application/json
+###
